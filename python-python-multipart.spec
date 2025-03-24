@@ -1,10 +1,12 @@
+%define module python_multipart
+
 Name:		python-python-multipart
-Version:	0.0.12
+Version:	0.0.20
 Release:	1
 Source0:	https://files.pythonhosted.org/packages/source/p/python-multipart/python_multipart-%{version}.tar.gz
 Summary:	A streaming multipart parser for Python
 URL:		https://pypi.org/project/python-multipart/
-License:	None
+License:	Apache-2.0
 Group:		Development/Python
 BuildRequires:	python%{pyver}dist(pip)
 BuildRequires:	python%{pyver}dist(hatchling)
@@ -23,5 +25,11 @@ A streaming multipart parser for Python
 %py_install
 
 %files
-%{py_sitedir}/multipart
-%{py_sitedir}/python_multipart-*.*-info
+%{python3_sitelib}/%{module}-*.dist-info
+%{python3_sitelib}/%{module}/*.py
+%{python3_sitelib}/%{module}/*.typed
+%{python3_sitelib}/%{module}/__pycache__/*.cpython-3*.pyc
+%{python3_sitelib}/multipart/*.py
+%{python3_sitelib}/multipart/__pycache__/*.cpython-3*.pyc
+%doc README.md
+%license LICENSE.txt
