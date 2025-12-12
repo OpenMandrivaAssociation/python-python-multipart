@@ -2,7 +2,7 @@
 
 Name:		python-python-multipart
 Version:	0.0.20
-Release:	2
+Release:	3
 Source0:	https://files.pythonhosted.org/packages/source/p/python-multipart/python_multipart-%{version}.tar.gz
 Summary:	A streaming multipart parser for Python
 URL:		https://pypi.org/project/python-multipart/
