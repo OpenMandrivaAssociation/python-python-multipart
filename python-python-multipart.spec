@@ -1,43 +1,38 @@
 %define module python_multipart
+%define oname multipart
+%bcond tests 1
 
 Name:		python-python-multipart
-Version:	0.0.20
-Release:	4
-Source0:	https://files.pythonhosted.org/packages/source/p/python-multipart/python_multipart-%{version}.tar.gz
 Summary:	A streaming multipart parser for Python
-URL:		https://pypi.org/project/python-multipart/
+Version:	0.0.22
+Release:	1
 License:	Apache-2.0
 Group:		Development/Python
+URL:		https://pypi.org/project/python-multipart/
+Source0:	https://files.pythonhosted.org/packages/source/p/python-multipart/%{module}-%{version}.tar.gz#/%{name}-%{version}.tar.gz
 
-BuildRequires:	python%{pyver}dist(pip)
-BuildRequires:	python%{pyver}dist(hatchling)
-BuildRequires:	python%{pyver}dist(pytest)
-BuildRequires:	python%{pyver}dist(pluggy)
-BuildRequires:	python%{pyver}dist(pyyaml)
-
+BuildSystem:	python
 BuildArch:	noarch
+BuildRequires:	python%{pyver}dist(hatchling)
+BuildRequires:	python%{pyver}dist(pip)
+BuildRequires:	python%{pyver}dist(wheel)
+%if %{with tests}
+BuildRequires:	python%{pyver}dist(pytest)
+BuildRequires:	python%{pyver}dist(pyyaml)
+%endif
 
 %description
-A streaming multipart parser for Python
+A streaming multipart parser for Python.
 
-%prep
-%autosetup -p1 -n python_multipart-%{version}
-
-%build
-%py_build
-
-%install
-%py_install
-
+%if %{with tests}
 %check
-pytest tests/
+export CI=true
+export PYTHONPATH="%{buildroot}%{python_sitelib}:${PWD}"
+pytest
+%endif
 
 %files
-%{python3_sitelib}/%{module}-*.dist-info
-%{python3_sitelib}/%{module}/*.py
-%{python3_sitelib}/%{module}/*.typed
-%{python3_sitelib}/%{module}/__pycache__/*.cpython-3*.pyc
-%{python3_sitelib}/multipart/*.py
-%{python3_sitelib}/multipart/__pycache__/*.cpython-3*.pyc
 %doc README.md
-%license LICENSE.txt
+%{python_sitelib}/%{oname}
+%{python_sitelib}/%{module}
+%{python_sitelib}/%{module}-%{version}.dist-info
