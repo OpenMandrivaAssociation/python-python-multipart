@@ -4,7 +4,7 @@
 
 Name:		python-python-multipart
 Summary:	A streaming multipart parser for Python
-Version:	0.0.22
+Version:	0.0.24
 Release:	1
 License:	Apache-2.0
 Group:		Development/Python
